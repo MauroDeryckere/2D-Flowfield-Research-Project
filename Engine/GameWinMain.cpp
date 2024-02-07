@@ -9,7 +9,7 @@
 #include "GameWinMain.h"
 #include "GameEngine.h"
 
-#include "Flowfields.h"	
+#include "../FlowField/Flowfields.h"	
 
 //-----------------------------------------------------------------
 // Defines

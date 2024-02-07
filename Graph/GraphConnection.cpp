@@ -1,5 +1,5 @@
 #include "GraphConnection.h"
-#include "GameEngine.h"
+#include "../Engine/GameEngine.h"
 
 GraphConnection::GraphConnection(int fromId, int toId) :
     m_FromId{ fromId },

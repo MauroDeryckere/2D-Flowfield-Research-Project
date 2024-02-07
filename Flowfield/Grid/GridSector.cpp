@@ -1,7 +1,7 @@
 #include "GridSector.h"
 
-#include "GameEngine.h" 
-#include "DebugSettings.h" 
+#include "../../Engine/GameEngine.h" 
+#include "../../DebugSettings.h" 
 
 #include <cassert>
 #include <cmath>

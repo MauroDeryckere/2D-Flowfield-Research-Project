@@ -1,5 +1,5 @@
 #include "Graph.h"
-#include "GameEngine.h"
+#include "../Engine/GameEngine.h"
 
 #include <cassert>
 

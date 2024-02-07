@@ -7,9 +7,9 @@
 // Include Files
 //-----------------------------------------------------------------
 #include "Flowfields.h"																				
-#include "Grid.h"
-#include "GridSector.h"
-#include "Agent.h"
+#include "Grid/Grid.h"
+#include "Grid/GridSector.h"
+#include "../Agent.h"
 
 //-----------------------------------------------------------------
 // Flowfields methods																				

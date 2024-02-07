@@ -1,5 +1,5 @@
 #include "GraphNode.h"
-#include "GameEngine.h"
+#include "../Engine/GameEngine.h"
 
 void GraphNode::Draw() const
 {

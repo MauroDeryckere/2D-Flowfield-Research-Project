@@ -1,7 +1,7 @@
 #include "AStar.h"
 
-#include "Graph.h"
-#include "GraphNode.h"
+#include "../Graph/Graph.h"
+#include "../Graph/GraphNode.h"
 
 AStar::AStar(Graph* pGraph) :
     m_pGraph{ pGraph }

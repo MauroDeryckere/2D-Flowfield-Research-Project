@@ -1,9 +1,9 @@
 #include "Grid.h"
-#include "GameEngine.h"
+#include "../../Engine/GameEngine.h"
 #include "GridSector.h"
-#include "AStar.h"
+#include "../../Pathfinding/AStar.h"
 
-#include "DebugSettings.h"
+#include "../../DebugSettings.h"
 
 #include <list>
 #include <cassert>

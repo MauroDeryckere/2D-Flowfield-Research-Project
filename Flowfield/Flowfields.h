@@ -9,10 +9,10 @@
 // Include Files
 //-----------------------------------------------------------------
 
-#include "Resource.h"	
-#include "GameEngine.h"
-#include "AbstractGame.h"
-#include "Utils.h"
+#include "../Engine/Resource.h"	
+#include "../Engine/GameEngine.h"
+#include "../Engine/AbstractGame.h"
+#include "../Utils.h"
 #include <memory>
 #include <vector>
 

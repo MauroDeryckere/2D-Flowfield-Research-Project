@@ -1,9 +1,9 @@
 #ifndef GRID 
 #define GRID
 
-#include "Utils.h"
-#include "Graph.h"
-#include "Portal.h"
+#include "../../Utils.h"
+#include "../../Graph/Graph.h"
+#include "../Portal/Portal.h"
 
 #include <vector>
 #include <memory>

@@ -1,8 +1,8 @@
 #ifndef GRIDSECTOR 
 #define GRIDSECTOR
 
-#include "Utils.h"
-#include "Portal.h"
+#include "../../Utils.h"
+#include "../Portal/Portal.h"
 #include "Grid.h"
 #include <functional>
 

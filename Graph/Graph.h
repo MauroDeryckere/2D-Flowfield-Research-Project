@@ -1,15 +1,16 @@
 #ifndef GRAPH 
 #define GRAPH
 
-#include "Utils.h"
+#include "../Utils.h"
+
 #include "GraphNode.h"
+#include "GraphConnection.h"
 
 #include <vector>
 #include <memory>
 
 using utils::Point2i;
 
-#include "GraphConnection.h"
 
 //Graph needs to be updated; TODO
 

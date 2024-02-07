@@ -1,6 +1,6 @@
 #include "Agent.h"
-#include "GameEngine.h"
-#include "GridSector.h"
+#include "Engine/GameEngine.h"
+#include "Flowfield/Grid/GridSector.h"
 
 Agent::Agent(const Point2i& pos):
 	m_Pos{pos}
