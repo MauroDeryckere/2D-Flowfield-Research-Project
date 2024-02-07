@@ -143,6 +143,7 @@
     <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="Graph\GraphConnection.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
+    <ClCompile Include="MapEditor\MapEditor.cpp" />
     <ClCompile Include="Pathfinding\AStar.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="Graph\GraphConnection.h" />
     <ClInclude Include="Graph\GraphNode.h" />
+    <ClInclude Include="MapEditor\MapEditor.h" />
     <ClInclude Include="Pathfinding\AStar.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

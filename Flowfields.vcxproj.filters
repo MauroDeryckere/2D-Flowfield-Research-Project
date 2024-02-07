@@ -40,6 +40,18 @@
     <Filter Include="Source Files\Graph">
       <UniqueIdentifier>{48598607-ef2d-45c7-b616-bc56a23d6a88}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\PathFinding">
+      <UniqueIdentifier>{de89e474-129e-4022-b187-21146bc00ed0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\PathFinding">
+      <UniqueIdentifier>{dd739a50-eb69-462e-ad71-e0b45fedcb77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\MapEditor">
+      <UniqueIdentifier>{74d49b40-7103-458e-a9c6-0349ddecb7e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MapEditor">
+      <UniqueIdentifier>{1a9f3572-6a78-4037-a571-fbcb42ce1896}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Engine\small.ico">
@@ -72,15 +84,18 @@
       <Filter>Source Files\Graph</Filter>
     </ClCompile>
     <ClCompile Include="Pathfinding\AStar.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flowfield\Grid\Grid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flowfield\Grid\GridSector.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\PathFinding</Filter>
     </ClCompile>
     <ClCompile Include="Flowfield\Flowfields.cpp">
+      <Filter>Source Files\Flowfield</Filter>
+    </ClCompile>
+    <ClCompile Include="Flowfield\Grid\Grid.cpp">
+      <Filter>Source Files\Flowfield</Filter>
+    </ClCompile>
+    <ClCompile Include="Flowfield\Grid\GridSector.cpp">
+      <Filter>Source Files\Flowfield</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor\MapEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -118,19 +133,22 @@
     <ClInclude Include="Graph\GraphNode.h">
       <Filter>Header Files\Graph</Filter>
     </ClInclude>
-    <ClInclude Include="Pathfinding\AStar.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Flowfield\Grid\Grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Flowfield\Grid\GridSector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Flowfield\Portal\Portal.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Flowfield</Filter>
     </ClInclude>
     <ClInclude Include="Flowfield\Flowfields.h">
+      <Filter>Header Files\Flowfield</Filter>
+    </ClInclude>
+    <ClInclude Include="Flowfield\Grid\Grid.h">
+      <Filter>Header Files\Flowfield</Filter>
+    </ClInclude>
+    <ClInclude Include="Flowfield\Grid\GridSector.h">
+      <Filter>Header Files\Flowfield</Filter>
+    </ClInclude>
+    <ClInclude Include="Pathfinding\AStar.h">
+      <Filter>Header Files\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor\MapEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
