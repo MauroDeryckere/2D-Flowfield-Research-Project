@@ -13,11 +13,15 @@
 #include "../Engine/GameEngine.h"
 #include "../Engine/AbstractGame.h"
 #include "../Utils.h"
+
 #include <memory>
 #include <vector>
 
+class UI;
+
 class Grid;
 class Agent;
+class MapEditor;
 
 //-----------------------------------------------------------------
 // Flowfields Class																
@@ -60,6 +64,11 @@ private:
 	// -------------------------
 	// Datamembers
 	// -------------------------
+
+	std::unique_ptr<UI> m_pUI;
+
+	std::unique_ptr<MapEditor> m_pMapEditor;
+	
 	std::unique_ptr<Grid> m_Grid;
 	std::unique_ptr<Font> m_pFont;
 

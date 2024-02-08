@@ -52,6 +52,12 @@
     <Filter Include="Source Files\MapEditor">
       <UniqueIdentifier>{1a9f3572-6a78-4037-a571-fbcb42ce1896}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{ccc94172-b9a5-470a-bbd6-1d637590793a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{5f0eb991-f63b-4204-8690-8c55a43b2fb6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Engine\small.ico">
@@ -96,7 +102,16 @@
       <Filter>Source Files\Flowfield</Filter>
     </ClCompile>
     <ClCompile Include="MapEditor\MapEditor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\MapEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UI.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIElement.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIScreen.cpp">
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +164,16 @@
       <Filter>Header Files\PathFinding</Filter>
     </ClInclude>
     <ClInclude Include="MapEditor\MapEditor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\MapEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UI.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIElement.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIScreen.h">
+      <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

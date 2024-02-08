@@ -6,10 +6,14 @@
 //-----------------------------------------------------------------
 // Include Files
 //-----------------------------------------------------------------
-#include "Flowfields.h"																				
+#include "Flowfields.h"			
+
+#include "../UI/UI.h"																				
 #include "Grid/Grid.h"
 #include "Grid/GridSector.h"
 #include "../Agent.h"
+#include "../MapEditor/MapEditor.h"
+
 
 //-----------------------------------------------------------------
 // Flowfields methods																				
@@ -48,6 +52,10 @@ void Flowfields::Initialize(HINSTANCE hInstance)
 
 void Flowfields::Start()
 {
+	m_pUI = std::make_unique<UI>(this);
+
+	m_pMapEditor = std::make_unique<MapEditor>(this);
+
 	m_pFont = std::make_unique<Font>(_T("Courier New"), false, false, false, 20);
 	m_Grid = std::make_unique<Grid>();
 
@@ -70,6 +78,8 @@ void Flowfields::Paint(RECT rect)
 	{
 		pAgent->Render();
 	}
+
+	m_pMapEditor->Draw();
 }
 
 void Flowfields::Tick()
@@ -154,7 +164,7 @@ void Flowfields::KeyPressed(TCHAR cKey)
 
 void Flowfields::CallAction(Caller* callerPtr)
 {
-	// Insert the code that needs to be executed when a Caller has to perform an action
+	m_pMapEditor->CallAction(callerPtr);
 }
 
 void Flowfields::InitRandomAgents()
