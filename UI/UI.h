@@ -27,6 +27,8 @@ private:
 	void InitializeScreens(Callable* pTarget);
 
 	void InitMainScreen(Callable* pTarget);
+
+	void SwitchToMainScreen();
 };
 
 #endif

@@ -7,4 +7,5 @@ UIElement::UIElement(Callable* pTarget, Button* pBtn, const utils::Recti& bounds
 
 	m_pElement.reset(pBtn);
 	m_pElement->AddActionListener(pTarget);
+
 }

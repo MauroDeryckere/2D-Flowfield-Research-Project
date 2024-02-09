@@ -28,10 +28,6 @@ void MapEditor::ToggleDisplay()
 
 void MapEditor::CallAction(Caller* callerPtr)
 {
-	if (callerPtr == m_pLoadMapBtn.get())
-	{
-		//Tetxbox to type map name to load
-	}
 }
 
 void MapEditor::DrawLoadingMap() const
