@@ -33,6 +33,8 @@
 #include <queue>						// using std::queue for event system
 #include <algorithm>
 
+#include <functional>					//Callback
+
 //-----------------------------------------------------------------
 // Pragma Library includes
 //-----------------------------------------------------------------
@@ -359,9 +361,12 @@ private:
 //-----------------------------------------------------------------
 // Button Class
 //-----------------------------------------------------------------
+
 class Button : public Caller
 {
 public:
+	using ClickCallback = std::function<void()>;
+
 	Button(const tstring& textRef);
 	Button();
 
@@ -384,6 +389,9 @@ public:
 	void	Show() const;
 	void	Hide() const;
 
+	// Method to set the callback function for button click
+	void SetClickCallback(ClickCallback callback);
+
 private:
 	// -------------------------
 	// Datamembers
@@ -394,6 +402,9 @@ private:
 	bool		m_Armed;
 	COLORREF	m_BgColor, m_ForeColor;
 	HFONT		m_Font, m_OldFont;
+
+	// Callback function for button click
+	ClickCallback m_ClickCallback;
 
 	// -------------------------
 	// Handler functions

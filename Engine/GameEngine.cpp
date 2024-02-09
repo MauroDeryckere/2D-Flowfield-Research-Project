@@ -2385,6 +2385,11 @@ void Button::SetFont(const tstring& fontNameRef, bool bold, bool italic, bool un
 	InvalidateRect(m_hWndButton, nullptr, true);
 }
 
+void Button::SetClickCallback(ClickCallback callback) 
+{
+	m_ClickCallback = callback;
+}
+
 LRESULT Button::ButtonProcStatic(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	#pragma warning(disable: 4312)
@@ -2438,7 +2443,17 @@ LRESULT Button::ButtonProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			GetCursorPos(&pt);
 
 			//if (PtInRect(&rc, pt) && m_Target) result = m_Target->CallAction(this);
-			if (PtInRect(&rc, pt)) CallListeners();
+			if (PtInRect(&rc, pt))
+			{
+				if (m_ClickCallback) 
+				{
+					m_ClickCallback();
+				}
+				else
+				{
+					CallListeners();
+				}
+			}
 
 			m_Armed = false;
 		}
