@@ -7,7 +7,7 @@ class MapEditor
 {
 public:
 
-	MapEditor(Callable* callablePtr);
+	MapEditor();
 	~MapEditor() = default;
 
 	void Draw() const;
@@ -20,8 +20,6 @@ public:
 
 private:
 	bool m_Display{false};
-
-	std::unique_ptr<Button> m_pLoadMapBtn;
 
 	enum class EditorState
 	{

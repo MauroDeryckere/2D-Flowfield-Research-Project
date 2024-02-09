@@ -54,7 +54,7 @@ void Flowfields::Start()
 {
 	m_pUI = std::make_unique<UI>(this);
 
-	m_pMapEditor = std::make_unique<MapEditor>(this);
+	m_pMapEditor = std::make_unique<MapEditor>();
 
 	m_pFont = std::make_unique<Font>(_T("Courier New"), false, false, false, 20);
 	m_Grid = std::make_unique<Grid>();

@@ -15,7 +15,9 @@ public:
 	UIScreen& operator=(const UIScreen& other) = delete;
 	UIScreen& operator=(UIScreen&& other) noexcept = delete;
 
-	void Draw() const;
+	void AddElement(UIElement* pElement);
+
+	void CallAction(Caller* callerPtr);
 
 private:
 	std::vector<std::unique_ptr<UIElement>> m_pUIElements;

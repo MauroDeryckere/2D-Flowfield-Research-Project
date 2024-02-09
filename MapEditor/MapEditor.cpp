@@ -1,12 +1,7 @@
 #include "MapEditor.h"
 
-MapEditor::MapEditor(Callable* callablePtr)
+MapEditor::MapEditor()
 {
-	m_pLoadMapBtn = std::make_unique<Button>();
-	m_pLoadMapBtn->SetBounds(GAME_ENGINE->GetWidth() - 100, GAME_ENGINE->GetHeight() - 25, 100, 25);
-	m_pLoadMapBtn->AddActionListener(callablePtr);
-	m_pLoadMapBtn->Show();
-
 }
 
 void MapEditor::Draw() const

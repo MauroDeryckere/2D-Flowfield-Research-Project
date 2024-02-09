@@ -2,6 +2,8 @@
 #define USERINTERFACE
 
 #include "UIScreen.h"
+#include <memory>
+
 
 class UI
 {
@@ -14,12 +16,17 @@ public:
 	UI& operator=(const UI& other) = delete;
 	UI& operator=(UI&& other) noexcept = delete;
 
-	void Draw() const;
+	void CallAction(Caller* callerPtr);
+
 
 private:
 	std::unique_ptr<UIScreen> m_pMainUIScreen;
 
+	UIScreen* m_pCurrScreen;
+
 	void InitializeScreens(Callable* pTarget);
+
+	void InitMainScreen(Callable* pTarget);
 };
 
 #endif
