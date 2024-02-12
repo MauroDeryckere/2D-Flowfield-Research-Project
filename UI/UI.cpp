@@ -82,7 +82,7 @@ void UI::InitMapEditorScreen()
 
 	auto loadMap = []()
 		{
-			MapEditor::LoadMap({ });
+			MapEditor::LoadMap("MapEditor/Maps/TestMap.txt");
 		};
 
 	auto pLoadMapBtn{ new Button{_T("Load Map")} };
