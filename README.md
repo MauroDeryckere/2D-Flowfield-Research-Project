@@ -7,7 +7,7 @@ Flowfield pathfinding is a technique that utilizes vectors stored in a grid to e
 
 Flowfields are especially useful in games with many enemies where you would dynamically update the cost of travel since you only need to recalculate that sector/field specifically.
 
-![image](https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/79d5b153-50ab-484c-ab63-2622eec9bfcb)
+![image](GitHubImages/IntroImg.png)
 *Example of the result, displaying the integration, flowfield, and portalgraph using clear costfield.*
 
 ### Key Features of Flowfields
@@ -27,7 +27,7 @@ std::vector<uint8_t> m_CostField;
 static const std::vector<uint8_t> m_ClearCostField;
 ```
 
-<img width="751" alt="image" src="https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/5e562944-179e-4575-b987-3fd5be5545f3">
+![image](GitHubImages/CostFieldImg.png)
 
 *Example of a randomized costfield.*
 
@@ -45,7 +45,7 @@ std::vector<uint16_t> m_IntegrationField;
 ```
 To calculate the integrationfield we take the costfield and integrate it outward. 
 
-<img width="750" alt="image" src="https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/005587a5-07c7-47f6-8999-ff49f295a886">
+![image](GitHubImages/IntegrationField.png)
 
 *Example of an inttegrationfield with a clear costfield.*
 
@@ -146,13 +146,13 @@ void Grid::RequestPath(int sourceX, int sourceY, int goalX, int goalY) noexcept
 
 After connecting the goal and source, we run A* on the graph of portals and calculate the shortest path or the least amount of flowfields. This ensures that no unnecessary fields are calculated. 
 
-<img width="750" alt="image" src="https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/47b49dee-2c82-42d4-aed1-14c71963aec9">
+![image](GitHubImages/GraphImg.png)
 
 *The portal Graphnodes, displaying how A Star is used on the portals, to select the correct sectors.*
 
 Since we are now combining flowfields, this does require an extra step in our integration which is why the window indexes and positions are stored in the portal struct. We send this struct for every connection or portal integration and create the path in reverse, so start by calculating the goal grid, send the integrated windows to the next grid, and continue the calculation that way until the source position has been reached. 
 
-<img width="748" alt="image" src="https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/1f24d503-24ee-4c5b-aded-a282b978b50a">
+![image](GitHubImages/FieldWithGraphImg.png)
 
 *Displaying the graph and portals, the used windows for the calculation are displayed in blue.*
 
@@ -179,7 +179,7 @@ for (size_t i{ 0 }; i < portal.toFieldWindowCellIdxes.size(); ++i)
 }
 ```
 
-![image](https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/726df4dc-b3de-4600-b7fd-3dcc46870177)
+![image](GitHubImages/FieldWithWalls.png)
 
 *Including walls*
 
@@ -229,7 +229,7 @@ Flowfields are a very powerful pathfinding tool and can be used for much more th
 ### Adding a line of sight pass
 In the future I would like to add a line of sight pass to reduce the need for calculations /  use of the field when possible.
 
-<img width="465" alt="image" src="https://github.com/Howest-DAE-GD/gpp-researchtopic-MauroDeryckere/assets/92228779/e698d8a2-de68-4e05-8a3e-5eda80133382">
+![image](GitHubImages/LineOfSighRef.png)
 
 *Line of sight pass used by one of my references*
 
