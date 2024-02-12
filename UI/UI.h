@@ -4,8 +4,7 @@
 #include "UIScreen.h"
 #include <memory>
 
-
-class UI
+class UI final
 {
 public:
 	UI(Callable* pTarget);
@@ -16,19 +15,18 @@ public:
 	UI& operator=(const UI& other) = delete;
 	UI& operator=(UI&& other) noexcept = delete;
 
-	void CallAction(Caller* callerPtr);
-
+	void RemoveUI();
 
 private:
-	std::unique_ptr<UIScreen> m_pMainUIScreen;
+	std::unique_ptr<UIScreen> m_pCurrScreen;
 
-	UIScreen* m_pCurrScreen;
+	Callable* m_pTarget;
 
-	void InitializeScreens(Callable* pTarget);
-
-	void InitMainScreen(Callable* pTarget);
+	void InitMainScreen();
+	void InitMapEditorScreen();
 
 	void SwitchToMainScreen();
+	void SwitchToMapEditorScreen();
 };
 
 #endif

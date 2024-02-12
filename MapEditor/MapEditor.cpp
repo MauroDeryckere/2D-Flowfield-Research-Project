@@ -6,36 +6,10 @@ MapEditor::MapEditor()
 
 void MapEditor::Draw() const
 {
-	if (m_Display)
-	{	
-		switch (m_EditorState)
-		{
-		case MapEditor::EditorState::LoadingMap:
-			DrawLoadingMap();
-			break;
-
-		case MapEditor::EditorState::CreatingMap:
-			DrawCreatingMap();
-			break;
-		}
-	}
 }
 
-void MapEditor::ToggleDisplay()
+bool MapEditor::LoadMap(const std::filesystem::path& filePath) 
 {
-	m_Display = !m_Display;
+	return true;
 }
 
-void MapEditor::CallAction(Caller* callerPtr)
-{
-}
-
-void MapEditor::DrawLoadingMap() const
-{
-
-}
-
-void MapEditor::DrawCreatingMap() const
-{
-
-}

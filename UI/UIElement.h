@@ -8,7 +8,7 @@
 
 class Caller;
 
-class UIElement
+class UIElement final
 {
 public:
 	UIElement(Callable* pTarget, Button* pBtn, const utils::Recti& bounds);
@@ -24,7 +24,6 @@ public:
 
 private:
 	std::unique_ptr<Caller> m_pElement;
-
 };
 
 #endif

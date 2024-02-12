@@ -3,34 +3,28 @@
 
 #include "../Engine/GameEngine.h";
 
-class MapEditor
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <optional>
+
+class MapEditor final
 {
 public:
-
 	MapEditor();
 	~MapEditor() = default;
 
+	MapEditor(const MapEditor& other) = delete;
+	MapEditor(MapEditor&& other) noexcept = delete;
+	MapEditor& operator=(const MapEditor& other) = delete;
+	MapEditor& operator=(MapEditor&& other) noexcept = delete;
+
 	void Draw() const;
 
-	void ToggleDisplay();
-
-	void CallAction(Caller* callerPtr);
-
-
+	static bool LoadMap(const std::filesystem::path& filePath);
 
 private:
-	bool m_Display{false};
 
-	enum class EditorState
-	{
-		LoadingMap = 0,
-		CreatingMap = 1
-	};
-
-	EditorState m_EditorState;
-
-	void DrawLoadingMap() const;
-	void DrawCreatingMap() const;
 };
 
 #endif

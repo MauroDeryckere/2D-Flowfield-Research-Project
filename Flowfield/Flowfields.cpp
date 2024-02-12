@@ -164,8 +164,6 @@ void Flowfields::KeyPressed(TCHAR cKey)
 
 void Flowfields::CallAction(Caller* callerPtr)
 {
-
-	m_pMapEditor->CallAction(callerPtr);
 }
 
 void Flowfields::InitRandomAgents()

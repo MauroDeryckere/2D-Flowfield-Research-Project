@@ -3,42 +3,104 @@
 #include "../Engine/GameEngine.h"
 #include "../Utils.h"
 
-UI::UI(Callable* pTarget)
-{
-	InitializeScreens(pTarget);
+#include "../MapEditor/MapEditor.h"
 
-	m_pCurrScreen = m_pMainUIScreen.get();
+UI::UI(Callable* pTarget):
+	m_pTarget{pTarget}
+{
+	InitMainScreen();
 }
 
-void UI::CallAction(Caller* callerPtr)
+void UI::RemoveUI()
 {
-	m_pCurrScreen->CallAction(callerPtr);
+	m_pCurrScreen = std::make_unique<UIScreen>(m_pTarget);
+
+	auto switchToMainScr = [this]()
+		{
+			this->SwitchToMainScreen();
+		};
+
+	auto pHideBtn{ new Button{_T("X")} };
+	pHideBtn->SetClickCallback(switchToMainScr);
+
+	auto pEditorElement{ new UIElement{ m_pTarget, pHideBtn, utils::Recti{GAME_ENGINE->GetWidth() - 25, 0, 25, 50}}};
+
+	m_pCurrScreen->AddElement(pEditorElement);
 }
 
-void UI::InitializeScreens(Callable* pTarget)
+void UI::InitMainScreen()
 {
-	InitMainScreen(pTarget);
-}
+	m_pCurrScreen = std::make_unique<UIScreen>(m_pTarget);
 
-void UI::InitMainScreen(Callable* pTarget)
-{
-	m_pMainUIScreen = std::make_unique<UIScreen>(pTarget);
-
-	// Create the button with a callback to switch to the main screen
-	auto switchToMainCallback = [this]() 
+	auto switchToMapEditorScr = [this]() 
 	{
-		this->SwitchToMainScreen();
+		this->SwitchToMapEditorScreen();
 	};
 
-	auto pEdtiorBtn{ new Button{_T("Map Editor")}};
-	pEdtiorBtn->SetClickCallback(switchToMainCallback);
+	auto pEdtiorBtn{ new Button{_T("Go To Map Editor")}};
+	pEdtiorBtn->SetClickCallback(switchToMapEditorScr);
 
-	auto pEditorElement{ new UIElement{ pTarget, pEdtiorBtn, utils::Recti{0, 200, 100, 25} } };
+	auto pEditorElement{ new UIElement{ m_pTarget, pEdtiorBtn, utils::Recti{0, GAME_ENGINE->GetHeight() - 50, 200, 50}}};
 
-	m_pMainUIScreen->AddElement(pEditorElement);
+	auto hideUI = [this]()
+		{
+			this->RemoveUI();
+		};
+
+	auto pHideBtn{ new Button{_T("X")} };
+	pHideBtn->SetClickCallback(hideUI);
+
+	auto pEditorElement2{ new UIElement{ m_pTarget, pHideBtn, utils::Recti{GAME_ENGINE->GetWidth() - 25, 0, 25, 50}} };
+
+	m_pCurrScreen->AddElement(pEditorElement);
+	m_pCurrScreen->AddElement(pEditorElement2);
+}
+
+void UI::InitMapEditorScreen()
+{
+	m_pCurrScreen = std::make_unique<UIScreen>(m_pTarget);
+
+	auto switchToMainScr = [this]()
+		{
+			this->SwitchToMainScreen();
+		};
+
+	auto pMainScrBtn{ new Button{_T("Go To Main Menu")} };
+	pMainScrBtn->SetClickCallback(switchToMainScr);
+	
+	auto pEditorElement{ new UIElement{ m_pTarget, pMainScrBtn, utils::Recti{0, GAME_ENGINE->GetHeight() - 50, 200, 50}} };
+
+	auto hideUI = [this]()
+		{
+			this->RemoveUI();
+		};
+
+	auto pHideBtn{ new Button{_T("X")} };
+	pHideBtn->SetClickCallback(hideUI);
+
+	auto pEditorElement2{ new UIElement{ m_pTarget, pHideBtn, utils::Recti{GAME_ENGINE->GetWidth() - 25, 0, 25, 50}} };
+
+	auto loadMap = []()
+		{
+			MapEditor::LoadMap({ });
+		};
+
+	auto pLoadMapBtn{ new Button{_T("Load Map")} };
+	pLoadMapBtn->SetClickCallback(loadMap);
+
+	auto pEditorElement3{ new UIElement{ m_pTarget, pLoadMapBtn, utils::Recti{0 + 400, GAME_ENGINE->GetHeight() - 50, 200, 50}} };
+
+	m_pCurrScreen->AddElement(pEditorElement);
+	m_pCurrScreen->AddElement(pEditorElement2);
+	m_pCurrScreen->AddElement(pEditorElement3);
 }
 
 void UI::SwitchToMainScreen()
 {
-	OutputDebugString(_T("MAIN SCREEN _------------------------------"));
+	InitMainScreen();
+}
+
+void UI::SwitchToMapEditorScreen()
+{
+	InitMapEditorScreen();
 }
