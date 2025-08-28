@@ -65,9 +65,9 @@ private:
 	// Datamembers
 	// -------------------------
 
-	std::unique_ptr<UI> m_pUI;
+	//std::unique_ptr<UI> m_pUI;
 
-	std::unique_ptr<MapEditor> m_pMapEditor;
+	//std::unique_ptr<MapEditor> m_pMapEditor;
 	
 	std::unique_ptr<Grid> m_Grid;
 	std::unique_ptr<Font> m_pFont;

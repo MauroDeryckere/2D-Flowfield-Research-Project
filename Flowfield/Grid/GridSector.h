@@ -44,7 +44,7 @@ public:
 
     uint16_t GetIntegrationFromIdx(unsigned idx) const;
 
-    const utils::Recti GetBounds() const;
+	[[nodiscard]] utils::Recti GetBounds() const noexcept;
 
     bool FreeSector() noexcept;
     bool LoadSector() noexcept;

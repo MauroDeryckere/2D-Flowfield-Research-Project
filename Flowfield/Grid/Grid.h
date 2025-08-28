@@ -29,12 +29,16 @@ public:
     bool UpdateGoalPos(int x, int y);
     bool UpdateSourcePos(int x, int y);
 
+	[[nodiscard]] utils::Recti const& GetBounds() const noexcept { return m_Bounds; }
+
     using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
 
 private:
     bool m_RecalculateGrid{ false };
     Point2i m_SourcePos{20, 200};
     Point2i m_GoalPos;
+
+    utils::Recti m_Bounds;
 
     Grid::GetIntegrationCostFromCellIdx m_CostFunction;
 
@@ -59,6 +63,8 @@ private:
     int PositionToGridSectorIdx(int x, int y) const; //-1 is invalid
 
     void ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept;
+
+    void AddGridSector(std::unique_ptr<GridSector>&& sector) noexcept;
 };
 
 #endif

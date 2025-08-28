@@ -70,7 +70,7 @@ GridSector::Directions GridSector::GetFlowFieldOutput(const utils::Point2i& agen
 	return static_cast<Directions>(m_FlowField[idx]);
 }
 
-const utils::Recti GridSector::GetBounds() const
+utils::Recti GridSector::GetBounds() const noexcept
 {
 	const utils::Recti bounds{m_BottomLeft.x, m_BottomLeft.y, m_CellSize * m_Cols, m_CellSize * m_Rows};
 

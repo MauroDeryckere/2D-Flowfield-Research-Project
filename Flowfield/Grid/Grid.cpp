@@ -50,6 +50,9 @@ void Grid::Draw() const
 	GAME_ENGINE->FillOval(m_GoalPos.x,m_GoalPos.y, 20, 20);
 	GAME_ENGINE->FillOval(m_SourcePos.x, m_SourcePos.y, 20, 20);
 
+	GAME_ENGINE->SetColor(RGB(255, 255, 255));
+	GAME_ENGINE->DrawRect(m_Bounds.x, m_Bounds.y, m_Bounds.width, m_Bounds.height);
+
 }
 
 void Grid::UpdateGrid()
@@ -217,15 +220,14 @@ void Grid::RequestPath(int sourceX, int sourceY, int goalX, int goalY) noexcept
 
 void Grid::InitGridSectors() noexcept
 {
-	//This function should be file data in a game;
 	constexpr unsigned amtOfGridSectors{ 4 };
 
 	m_pGridSectors.reserve(amtOfGridSectors);
 
-	m_pGridSectors.emplace_back(std::make_unique<GridSector>(Point2i{ 0,   GAME_ENGINE->GetHeight() }));
-	m_pGridSectors.emplace_back(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() }));
-	m_pGridSectors.emplace_back(std::make_unique<GridSector>(Point2i{ 0,   GAME_ENGINE->GetHeight() - 500 }));
-	m_pGridSectors.emplace_back(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() - 500 }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,  GAME_ENGINE->GetHeight() }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,   GAME_ENGINE->GetHeight() - 500 }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() - 500 }));
 
 	m_Portals.resize(amtOfGridSectors);
 }
@@ -257,6 +259,41 @@ void Grid::ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept
 			*it = activeGridIdxes.back();
 			activeGridIdxes.pop_back();
 		}
+	}
+}
+
+void Grid::AddGridSector(std::unique_ptr<GridSector>&& sector) noexcept
+{
+	// Add sector
+	m_pGridSectors.emplace_back(std::move(sector));
+
+	// Update bounds
+	auto const& bounds{ m_pGridSectors.back()->GetBounds()};
+
+	// Update min x
+	if (bounds.x < m_Bounds.x)
+	{
+		m_Bounds.width += (m_Bounds.x - bounds.x);
+		m_Bounds.x = bounds.x;
+	}
+
+	// Update max x
+	if (bounds.x + bounds.width > m_Bounds.x + m_Bounds.width)
+	{
+		m_Bounds.width = (bounds.x + bounds.width) - m_Bounds.x;
+	}
+
+	// Update min y
+	if (bounds.y < m_Bounds.y)
+	{
+		m_Bounds.height += (m_Bounds.y - bounds.y);
+		m_Bounds.y = bounds.y;
+	}
+
+	// Update max y
+	if (bounds.y + bounds.height > m_Bounds.y + m_Bounds.height)
+	{
+		m_Bounds.height = (bounds.y + bounds.height) - m_Bounds.y;
 	}
 }
 

@@ -52,15 +52,14 @@ void Flowfields::Initialize(HINSTANCE hInstance)
 
 void Flowfields::Start()
 {
-	m_pUI = std::make_unique<UI>(this);
-
-	m_pMapEditor = std::make_unique<MapEditor>();
+	//m_pUI = std::make_unique<UI>(this);
+	//m_pMapEditor = std::make_unique<MapEditor>();
 
 	m_pFont = std::make_unique<Font>(_T("Courier New"), false, false, false, 20);
 	m_Grid = std::make_unique<Grid>();
 
 	//m_pAgents.emplace_back(std::make_unique<Agent>());
-	//InitRandomAgents();
+	InitRandomAgents();
 
 	GAME_ENGINE->SetFont(m_pFont.get());
 }
@@ -79,7 +78,7 @@ void Flowfields::Paint(RECT rect)
 		pAgent->Render();
 	}
 
-	m_pMapEditor->Draw();
+	//m_pMapEditor->Draw();
 }
 
 void Flowfields::Tick()
@@ -168,15 +167,15 @@ void Flowfields::CallAction(Caller* callerPtr)
 
 void Flowfields::InitRandomAgents()
 {
-	//constexpr auto AMT_OF_AGENTS{ 10 };
+	constexpr auto AMT_OF_AGENTS{ 10 };
 
-	//auto& bounds{ m_Grid->GetBounds() };
+	auto& bounds{ m_Grid->GetBounds() };
 
-	//for (size_t i{ 0 }; i < AMT_OF_AGENTS; ++i)
-	//{
-	//	const int x{ rand() % bounds.width + bounds.x + 1};
-	//	const int y{ rand() % bounds.height + (GAME_ENGINE->GetHeight() - bounds.y + 1)};
+	for (size_t i{ 0 }; i < AMT_OF_AGENTS; ++i)
+	{
+		const int x{ rand() % bounds.width + bounds.x + 1};
+		const int y{ rand() % bounds.height + (GAME_ENGINE->GetHeight() - bounds.y + 1)};
 
-	//	m_pAgents.emplace_back(std::make_unique<Agent>( utils::Point2i{ x, y } ));
-	//}
+		m_pAgents.emplace_back(std::make_unique<Agent>( utils::Point2i{ x, y } ));
+	}
 }
