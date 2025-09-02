@@ -163,9 +163,6 @@
     <ClInclude Include="Pathfinding\AStar.h">
       <Filter>Header Files\PathFinding</Filter>
     </ClInclude>
-    <ClInclude Include="MapEditor\MapEditor.h">
-      <Filter>Header Files\MapEditor</Filter>
-    </ClInclude>
     <ClInclude Include="UI\UI.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
@@ -173,6 +170,9 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="UI\UIScreen.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditor\MapEditor.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
   </ItemGroup>

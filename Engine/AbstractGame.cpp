@@ -24,7 +24,7 @@ void AbstractGame::Initialize(HINSTANCE hInstance)
 	GAME_ENGINE->SetTitle(_T("Flowfields"));
 	GAME_ENGINE->SetIcon(IDI_BIG);
 	GAME_ENGINE->SetSmallIcon(IDI_SMALL);
-	//GAME_ENGINE->RunGameLoop(true);
+	GAME_ENGINE->RunGameLoop(true);
 
 	// Set optional values
 	GAME_ENGINE->SetWidth(640);

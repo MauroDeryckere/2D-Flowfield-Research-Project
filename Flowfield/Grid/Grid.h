@@ -35,8 +35,8 @@ public:
 
 private:
     bool m_RecalculateGrid{ false };
-    Point2i m_SourcePos{20, 200};
-    Point2i m_GoalPos;
+    Point2i m_SourcePos{0, 0};
+    Point2i m_GoalPos{ 0, 0 };
 
     utils::Recti m_Bounds;
 
@@ -64,7 +64,7 @@ private:
 
     void ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept;
 
-    void AddGridSector(std::unique_ptr<GridSector>&& sector) noexcept;
+    void AddGridSector(std::unique_ptr<GridSector>&& sector, bool first = false) noexcept;
 };
 
 #endif

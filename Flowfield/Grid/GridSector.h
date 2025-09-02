@@ -14,7 +14,7 @@ class GridSector final
 {
 public:
     //Lookup table for the directions
-    enum class Directions
+    enum class Directions : uint8_t
     {
         N = 0,
         NE = 1,
@@ -53,7 +53,7 @@ public:
 
 private:
     const utils::Point2i m_BottomLeft;
-    static const unsigned m_CellSize{50};
+    static const unsigned m_CellSize{ 25 };
 
     static const unsigned m_Rows {10};
     static const unsigned m_Cols {10};

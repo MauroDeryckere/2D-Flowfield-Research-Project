@@ -7,11 +7,14 @@
 
 #include <list>
 #include <cassert>
-
+#include <algorithm>
 using utils::Point2i;
 
 Grid::Grid()
 {
+	m_SourcePos = { 0, GAME_ENGINE->GetHeight() - 1 };
+	m_GoalPos = { 0, GAME_ENGINE->GetHeight() - 1 };
+
 	m_pGraph = std::make_unique<Graph>();
 
 	InitGridSectors();
@@ -50,7 +53,7 @@ void Grid::Draw() const
 	GAME_ENGINE->FillOval(m_GoalPos.x,m_GoalPos.y, 20, 20);
 	GAME_ENGINE->FillOval(m_SourcePos.x, m_SourcePos.y, 20, 20);
 
-	GAME_ENGINE->SetColor(RGB(255, 255, 255));
+	GAME_ENGINE->SetColor(RGB(0, 255, 0));
 	GAME_ENGINE->DrawRect(m_Bounds.x, m_Bounds.y, m_Bounds.width, m_Bounds.height);
 
 }
@@ -224,10 +227,10 @@ void Grid::InitGridSectors() noexcept
 
 	m_pGridSectors.reserve(amtOfGridSectors);
 
-	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,  GAME_ENGINE->GetHeight() }));
-	AddGridSector(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() }));
-	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,   GAME_ENGINE->GetHeight() - 500 }));
-	AddGridSector(std::make_unique<GridSector>(Point2i{ 500, GAME_ENGINE->GetHeight() - 500 }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,  GAME_ENGINE->GetHeight() }), true);
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 250, GAME_ENGINE->GetHeight() }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 0,   GAME_ENGINE->GetHeight() - 250 }));
+	AddGridSector(std::make_unique<GridSector>(Point2i{ 250, GAME_ENGINE->GetHeight() - 250 }));
 
 	m_Portals.resize(amtOfGridSectors);
 }
@@ -262,45 +265,43 @@ void Grid::ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept
 	}
 }
 
-void Grid::AddGridSector(std::unique_ptr<GridSector>&& sector) noexcept
+void Grid::AddGridSector(std::unique_ptr<GridSector>&& sector, bool first) noexcept
 {
+	assert(sector && "Sector must not be null");
+
 	// Add sector
 	m_pGridSectors.emplace_back(std::move(sector));
 
-	// Update bounds
-	auto const& bounds{ m_pGridSectors.back()->GetBounds()};
+	auto const& bounds{ m_pGridSectors.back()->GetBounds() };
 
-	// Update min x
-	if (bounds.x < m_Bounds.x)
+	if (!first)
 	{
-		m_Bounds.width += (m_Bounds.x - bounds.x);
-		m_Bounds.x = bounds.x;
+		assert(bounds.width > 0 && "Sector width must be positive");
+		assert(bounds.height > 0 && "Sector height must be positive");
+
+		//assert(not utils::IsOverlapping(bounds, m_Bounds));
+
+		// Update enclosing bounds properly
+		int const newMinX{ min(m_Bounds.x, bounds.x) };
+		int const newMaxX{ max(m_Bounds.x + m_Bounds.width, bounds.x + bounds.width) };
+		m_Bounds.x = newMinX;
+		m_Bounds.width = newMaxX - newMinX;
+
+		int const newBottomY{ max(m_Bounds.y, bounds.y) };
+		int const newTopY{ min(m_Bounds.y - m_Bounds.height, bounds.y - bounds.height) };
+		m_Bounds.y = newBottomY;
+		m_Bounds.height = newBottomY - newTopY;
 	}
-
-	// Update max x
-	if (bounds.x + bounds.width > m_Bounds.x + m_Bounds.width)
+	else
 	{
-		m_Bounds.width = (bounds.x + bounds.width) - m_Bounds.x;
-	}
-
-	// Update min y
-	if (bounds.y < m_Bounds.y)
-	{
-		m_Bounds.height += (m_Bounds.y - bounds.y);
-		m_Bounds.y = bounds.y;
-	}
-
-	// Update max y
-	if (bounds.y + bounds.height > m_Bounds.y + m_Bounds.height)
-	{
-		m_Bounds.height = (bounds.y + bounds.height) - m_Bounds.y;
+		m_Bounds = bounds;
 	}
 }
 
 void Grid::InitPortals() noexcept
 {
 	//This function should be file data in a game;
-	constexpr auto cellSize{ 50 };
+	constexpr auto cellSize{ 25 };
 	constexpr auto amtOfCells{ 10 };
 
 	//portalside is the direction the algorithm is going towards
@@ -384,10 +385,10 @@ void Grid::InitPortals() noexcept
 			return windowPos;
 		};
 
-	const Point2i portal0Pos{ 500, GAME_ENGINE->GetHeight() - 250 },
-				  portal1Pos{ 250, GAME_ENGINE->GetHeight() - 500 },
-				  portal2Pos{ 750, GAME_ENGINE->GetHeight() - 500 },
-				  portal3Pos{ 500, GAME_ENGINE->GetHeight() - 750 };
+	const Point2i portal0Pos{ 500 / 2, GAME_ENGINE->GetHeight() - 250 / 2 },
+				  portal1Pos{ 250 / 2, GAME_ENGINE->GetHeight() - 500 / 2 },
+				  portal2Pos{ 750 / 2, GAME_ENGINE->GetHeight() - 500 / 2 },
+				  portal3Pos{ 500 / 2, GAME_ENGINE->GetHeight() - 750 / 2 };
 
 	//Add portals to graph
 	m_pGraph->AddNode(portal0Pos);

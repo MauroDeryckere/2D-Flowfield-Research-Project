@@ -331,6 +331,16 @@ namespace utils
 		return true;
 	};
 
+	inline bool IsOverlapping(const utils::Recti& r1, const utils::Recti& r2)
+	{
+		if (r1.x > r2.x + r2.width || r1.x + r1.width < r2.x
+			|| r1.y < r2.y - r2.height || r1.y - r1.height > r2.y)
+		{
+			return false;
+		}
+		return true;
+	};
+
 #pragma endregion //ExtraFunctions
 }
 #endif

@@ -173,8 +173,8 @@ void Flowfields::InitRandomAgents()
 
 	for (size_t i{ 0 }; i < AMT_OF_AGENTS; ++i)
 	{
-		const int x{ rand() % bounds.width + bounds.x + 1};
-		const int y{ rand() % bounds.height + (GAME_ENGINE->GetHeight() - bounds.y + 1)};
+		const int x{ rand() % bounds.width + bounds.x};
+		const int y{ bounds.y - (rand() % bounds.height) };
 
 		m_pAgents.emplace_back(std::make_unique<Agent>( utils::Point2i{ x, y } ));
 	}

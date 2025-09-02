@@ -9,10 +9,10 @@ Agent::Agent(const Point2i& pos):
 
 void Agent::Render() const
 {
-	constexpr auto agentColor{ RGB(255, 1, 1) };
+	constexpr auto agentColor{ RGB(0,0,0) };
 
 	GAME_ENGINE->SetColor(agentColor);
-	GAME_ENGINE->FillOval(m_Pos.x, m_Pos.y, m_AgentSize, m_AgentSize);
+	GAME_ENGINE->DrawRect(m_Pos.x, m_Pos.y, 20, 20);
 }
 
 void Agent::Update(GridSector* pGridS)
