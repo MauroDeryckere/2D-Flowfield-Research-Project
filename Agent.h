@@ -18,7 +18,7 @@ class Agent final
 		Agent& operator=(Agent&&) noexcept = delete;
 
 		void Render() const;
-		void Update(GridSector* pGridS);
+		void Update(class Grid* pGrid);
 
 	private:
 		Point2i m_Pos;

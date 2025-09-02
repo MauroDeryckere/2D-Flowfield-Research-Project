@@ -165,6 +165,22 @@ bool Grid::UpdateSourcePos(int x, int y)
 	return true;
 }
 
+GridSector* Grid::GetGridSector(Point2i const& position) const
+{
+	for (auto const& s : m_pGridSectors)
+	{
+		auto const b = s->GetBounds();
+		if (utils::IsPointInRect(position, b))
+		{
+			if (s->IsActive())
+			{
+				return s.get();
+			}
+		}
+	}
+	return nullptr; // Not found
+}
+
 void Grid::SetupPortalGraph() noexcept
 {
 	//Connect the portals that should be connected in the graph

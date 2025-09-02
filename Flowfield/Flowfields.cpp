@@ -84,6 +84,14 @@ void Flowfields::Paint(RECT rect)
 void Flowfields::Tick()
 {
 	m_Grid->UpdateGrid();
+
+	if (m_SetGoal and m_SetSource)
+	{
+		for (auto& agent : m_pAgents)
+		{
+			agent->Update(m_Grid.get());
+		}
+	}
 }
 
 void Flowfields::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPARAM wParam)
@@ -91,10 +99,12 @@ void Flowfields::MouseButtonAction(bool isLeft, bool isDown, int x, int y, WPARA
 	if (isLeft && isDown)
 	{
 		m_Grid->UpdateGoalPos(x, y);
+		m_SetGoal = true;
 	}
 	if (!isLeft && isDown)
 	{
 		m_Grid->UpdateSourcePos(x, y);
+		m_SetSource = true;
 	}
 }
 

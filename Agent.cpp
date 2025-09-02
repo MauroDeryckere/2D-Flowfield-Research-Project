@@ -12,12 +12,19 @@ void Agent::Render() const
 	constexpr auto agentColor{ RGB(0,0,0) };
 
 	GAME_ENGINE->SetColor(agentColor);
-	GAME_ENGINE->DrawRect(m_Pos.x, m_Pos.y, 20, 20);
+	GAME_ENGINE->FillOval(m_Pos.x, m_Pos.y, m_AgentSize, m_AgentSize);
 }
 
-void Agent::Update(GridSector* pGridS)
+void Agent::Update(Grid* pGrid)
 {
-	auto dir{ pGridS->GetFlowFieldOutput(m_Pos) };
+	auto sector = pGrid->GetGridSector(m_Pos);
+
+	if (not sector)
+	{
+		return;
+	}
+
+	auto dir{ sector->GetFlowFieldOutput(m_Pos) };
 
 	if (dir == GridSector::Directions::INVALID)
 	{

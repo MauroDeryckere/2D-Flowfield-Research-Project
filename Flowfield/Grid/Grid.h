@@ -33,6 +33,8 @@ public:
 
     using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
 
+    GridSector* GetGridSector(Point2i const& position) const;
+
 private:
     bool m_RecalculateGrid{ false };
     Point2i m_SourcePos{0, 0};

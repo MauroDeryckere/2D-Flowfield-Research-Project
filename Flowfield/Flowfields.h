@@ -74,5 +74,8 @@ private:
 
 	std::vector<std::unique_ptr<Agent>> m_pAgents;
 
+	bool m_SetGoal = false;
+	bool m_SetSource = false;
+
 	void InitRandomAgents();
 };
