@@ -24,7 +24,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 {
 	if (GAME_ENGINE == nullptr) return FALSE;		// create the game engine object, exit if it fails
 
-	GAME_ENGINE->SetGame(new Flowfields());					// any class that implements AbstractGame
+	GAME_ENGINE->SetGame(new FF::Flowfields());					// any class that implements AbstractGame
 
 	return GAME_ENGINE->Run(hInstance, nCmdShow);	// here we go
 }

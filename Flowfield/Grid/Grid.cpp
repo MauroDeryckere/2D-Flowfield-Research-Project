@@ -4,7 +4,7 @@
 #include "../../Pathfinding/AStar.h"
 
 #include "../../DebugSettings.h"
-
+#include "GridSector.h"
 #include <list>
 #include <cassert>
 #include <algorithm>
@@ -25,6 +25,10 @@ Grid::Grid()
 	{
 		return m_pGridSectors[toFieldId]->GetIntegrationFromIdx(cellIdx);
 	};
+}
+
+Grid::~Grid()
+{
 }
 
 void Grid::Draw() const

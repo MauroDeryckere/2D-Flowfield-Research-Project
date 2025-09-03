@@ -15,7 +15,7 @@ class Grid final
 {
 public:
     Grid();
-    ~Grid() = default;
+    ~Grid();
 
     Grid(const Grid&) = delete;
     Grid& operator=(const Grid&) = delete;
@@ -33,7 +33,7 @@ public:
 
     using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
 
-    GridSector* GetGridSector(Point2i const& position) const;
+	GridSector* GetGridSector(Point2i const& position) const;
 
 private:
     bool m_RecalculateGrid{ false };

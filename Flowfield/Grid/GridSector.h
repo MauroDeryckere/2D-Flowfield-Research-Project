@@ -3,12 +3,13 @@
 
 #include "../../Utils.h"
 #include "../Portal/Portal.h"
-#include "Grid.h"
 #include <functional>
 
 #include <vector>
 #include <memory>
 #include <list>
+
+#include "Grid.h"
 
 class GridSector final
 {

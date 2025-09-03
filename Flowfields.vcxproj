@@ -143,15 +143,12 @@
     <ClCompile Include="Graph\Graph.cpp" />
     <ClCompile Include="Graph\GraphConnection.cpp" />
     <ClCompile Include="Graph\GraphNode.cpp" />
-    <ClCompile Include="MapEditor\MapEditor.cpp" />
     <ClCompile Include="Pathfinding\AStar.cpp" />
-    <ClCompile Include="UI\UI.cpp" />
-    <ClCompile Include="UI\UIElement.cpp" />
-    <ClCompile Include="UI\UIScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Agent.h" />
     <ClInclude Include="DebugSettings.h" />
+    <ClInclude Include="Defines.h" />
     <ClInclude Include="Engine\AbstractGame.h" />
     <ClInclude Include="Engine\GameDefines.h" />
     <ClInclude Include="Engine\GameEngine.h" />
@@ -164,11 +161,7 @@
     <ClInclude Include="Graph\Graph.h" />
     <ClInclude Include="Graph\GraphConnection.h" />
     <ClInclude Include="Graph\GraphNode.h" />
-    <ClInclude Include="MapEditor\MapEditor.h" />
     <ClInclude Include="Pathfinding\AStar.h" />
-    <ClInclude Include="UI\UI.h" />
-    <ClInclude Include="UI\UIElement.h" />
-    <ClInclude Include="UI\UIScreen.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
   <ItemGroup>
