@@ -1,0 +1,28 @@
+set(ENGINE_PUBLIC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Public")
+set(ENGINE_PRIVATE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
+
+# Gather all source files
+file(GLOB_RECURSE ENGINE_PRIVATE_SOURCES
+    "${ENGINE_PRIVATE_DIR}/*.cpp"
+)
+
+file(GLOB_RECURSE ENGINE_PRIVATE_HEADERS
+    "${ENGINE_PRIVATE_DIR}/*.h"
+)
+
+file(GLOB_RECURSE ENGINE_PUBLIC_HEADERS
+    "${ENGINE_PUBLIC_DIR}/*.h"
+)
+
+add_library(Engine STATIC
+    ${ENGINE_PRIVATE_SOURCES}
+    ${ENGINE_PRIVATE_HEADERS}
+    ${RENDERER_PUBLIC_HEADERS}
+)
+
+target_include_directories(Engine
+    PUBLIC
+        ${CMAKE_CURRENT_SOURCE_DIR}/public
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/private
+)
