@@ -2,6 +2,20 @@
 
 Welcome to my Flowfield Pathfinding research project! This repository provides a comprehensive implementation of flowfield pathfinding in C++. Using the engine of our programming teachers, Kevin Hoefman developed. Flowfields offer a powerful and efficient solution for navigating many agents through complex environments with the same goal. I specifically researched flowfields for large maps in games but this could also be used for simulations,... 
 
+## Table of Contents
+- [2D Flowfieds Research Project](#2d-flowfields-research-project)
+  - [Table of Contents](#table-of-contents)
+  - [What is Flowfield Pathfinding?](#what-is-flowfield-pathfinding)
+	 - [Key Features of Flowfields](#key-features-of-flowfields)
+  - [Demo & Keybinds](#demo-keybinds)
+  - [Flowfield Design And Implementation](#flowfield-design-and-implementation)
+	- [Costfield](#costfield)
+	- [Integrationfield](integrationfield)
+	- [Flowfield](#flowfield)
+	- [Combining multiple flowfields using Astar](#combining-multiple-flowfields-using-astar)
+  - [Conclusion / Future work](#conclusion-future-work)
+  - [References](#references)
+	
 ## What is Flowfield Pathfinding?
 Flowfield pathfinding is a technique that utilizes vectors stored in a grid to efficiently guide multiple agents through a given space. In contrast to traditional node-based methods, this approach creates a continuous, smooth flow across the environment, enabling agents to navigate seamlessly around obstacles or through varying terrain.
 
@@ -15,6 +29,14 @@ Flowfields are especially useful in games with many enemies where you would dyna
 - Customizable Cost Factors: Allow users to customize and assign varying costs to different areas of the environment, giving them fine-grained control over pathfinding decisions.
   - Dynamic Obstacle Handling: Adapt to changes in the environment in real-time, with the flowfield updating dynamically to account for moving obstacles.
 - Multi-Agent Coordination: Support coordination among multiple agents, allowing them to share information and collaboratively navigate through the environment while avoiding collisions.
+
+## Demo & Keybinds
+The simple demo has the following keybinds that can be used to toggle visualization: 
+F1: Draw the cost field. <br>
+F2: Draw the integration field. <br>
+F3: Draw the flow field. <br>
+F4: Draw the portals. <br>
+F5: Draw the graph. <br>
 
 ## Flowfield Design And Implementation
 To understand how the flowfield works for large maps, we first have to look at a single flowfield (or gridsector when we combine multiple smaller flowfields). Each flowfield or vector field is made up of 3 different fields or vectors. 
@@ -73,7 +95,7 @@ std::vector<uint8_t> m_FlowField;
 
 The flowfield is calculated by comparing all neighbors of each integrationfield cell one by one and storing the direction to the cheapest. 
 
-### Combining multiple flowfields using A*
+### Combining multiple flowfields using Astar
 While you could just generate one very large flowfield for your game, this would not be efficient since you would need to update the whole map every time a new goal is set or any cost is updated. You would also be using a lot of resources that could be released. The solution to this is to combine multiple smaller flowfields, the references I used recommended 10x10 fields so that is what I have used in my implementation.
 
 Each flowfield is a gridSector in my Grid class. and the different sectors are connected by portals, these portals are also nodes in a Graph. 

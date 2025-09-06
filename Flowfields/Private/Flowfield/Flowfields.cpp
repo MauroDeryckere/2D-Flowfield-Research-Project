@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "Flowfield/Flowfields.h"
+#include "Defines.h"
 
 namespace FF
 {
@@ -26,7 +27,7 @@ namespace FF
 	    GAME_ENGINE->SetFrameRate(50);
 
 		// Set the keys that the game needs to listen to
-		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2 });
+		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2, VK_F3, VK_F4, VK_F5 });
 
 	}
 
@@ -125,6 +126,30 @@ namespace FF
 		switch (cKey)
 		{
 		case VK_F1:
+		{
+			g_DrawCostField = !g_DrawCostField;
+			break;
+		}
+		case VK_F2:
+		{
+			g_DrawIntegrationField = !g_DrawIntegrationField;
+			break;
+		}
+		case VK_F3:
+		{
+			g_DrawFlowField = !g_DrawFlowField;
+			break;
+		}
+		case VK_F4:
+		{
+			g_DrawPortals = !g_DrawPortals;
+			break;
+		}
+		case VK_F5:
+		{
+			g_DrawGraph = !g_DrawGraph;
+			break;
+		}
 		default: break;
 		}
 		
