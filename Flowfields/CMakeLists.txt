@@ -1,6 +1,5 @@
 set(FLOWFIELDS_PUBLIC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Public")
 set(FLOWFIELDS_PRIVATE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Private")
-
 # Gather all source files
 file(GLOB_RECURSE FLOWFIELDS_PRIVATE_SOURCES
     "${FLOWFIELDS_PRIVATE_DIR}/*.cpp"
@@ -30,6 +29,11 @@ target_include_directories(Flowfields
 target_link_libraries(Flowfields
     PRIVATE
         Engine
+)
+
+target_precompile_headers(Flowfields
+    PRIVATE
+        ${FLOWFIELDS_PRIVATE_DIR}/pch.h
 )
 
 set_target_properties(Flowfields PROPERTIES

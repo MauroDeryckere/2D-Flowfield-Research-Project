@@ -1,11 +1,4 @@
-#include "Flowfield/Grid/Grid.h"
-#include "GameEngine.h"
-#include "Flowfield/Grid/GridSector.h"
-#include "Pathfinding/AStar.h"
-
-#include <list>
-#include <cassert>
-#include <algorithm>
+#include "pch.h"
 
 #include "Defines.h"
 

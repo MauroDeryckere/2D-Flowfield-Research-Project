@@ -1,7 +1,4 @@
-#include "Pathfinding/AStar.h"
-
-#include "Graph/Graph.h"
-#include "Graph/GraphNode.h"
+#include "pch.h"
 
 namespace FF
 {

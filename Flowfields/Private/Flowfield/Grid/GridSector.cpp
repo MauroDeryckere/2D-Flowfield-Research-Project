@@ -1,11 +1,6 @@
-#include "Flowfield/Grid/GridSector.h"
+#include "pch.h"
 
-#include "GameEngine.h" 
-#include "Defines.h" 
-
-#include <cassert>
-#include <cmath>
-#include <list>
+#include "Defines.h"
 
 namespace FF
 {
