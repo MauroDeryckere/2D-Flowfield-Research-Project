@@ -27,7 +27,7 @@ std::vector<uint8_t> m_CostField;
 static const std::vector<uint8_t> m_ClearCostField;
 ```
 
-![image](GitHubImages/CostFieldImg.png)
+![image](Docs/GitHubImages/CostFieldImg.png)
 
 *Example of a randomized costfield.*
 
@@ -45,7 +45,7 @@ std::vector<uint16_t> m_IntegrationField;
 ```
 To calculate the integrationfield we take the costfield and integrate it outward. 
 
-![image](GitHubImages/IntegrationField.png)
+![image](Docs/GitHubImages/IntegrationField.png)
 
 *Example of an inttegrationfield with a clear costfield.*
 
