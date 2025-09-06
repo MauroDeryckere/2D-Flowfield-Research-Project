@@ -35,14 +35,12 @@ namespace utils
 #define ZeroVector2f Vector2f()
 #define UnitVector2f Vector2f(1.f,1.f)
 
-	//Point 2i
 	struct Point2i
 	{
 		int x;
 		int y;
 	};
 
-	//Recti
 	struct Recti
 	{
 		int x;
@@ -51,26 +49,13 @@ namespace utils
 		int height;
 	};
 
-	//Vector 2f
 	struct Vector2f
 	{
-		//=== Datamembers ===
 		float x = 0.0f;
 		float y = 0.0f;
 
-		//=== Constructors ===
 		Vector2f() = default;
 		Vector2f(float _x, float _y) :x(_x), y(_y) {};
-
-//		//=== Vector Conversions Functions ===
-//#ifdef USE_BOX2D
-//		explicit Vector2f(const b2Vec2& v) : x(v.x), y(v.y) {};
-//		Vector2f& operator=(const b2Vec2& v) { x = v.x; y = v.y; return *this; }
-//		operator b2Vec2() const
-//		{
-//			return { x, y };
-//		};
-//#endif
 
 		//=== Arithmetic Operators ===
 		inline auto operator-(const Vector2f& v) const
@@ -109,8 +94,6 @@ namespace utils
 			const auto revScale = 1.0f / scale;
 			x *= revScale; y *= revScale; return *this;
 		}
-
-
 
 		//=== Relational Operators ===
 		inline auto operator==(const Vector2f& v) const /*Check if both components are equal*/
@@ -233,7 +216,7 @@ namespace utils
 		os << "(" << rhs.x << ", " << rhs.y << " )";
 		return os;
 	}
-#pragma endregion //GlobalVectorOperators
+#pragma endregion
 
 	//=== Global Vector Functions ===
 #pragma region GlobalVectorFunctions
@@ -283,19 +266,9 @@ namespace utils
 		scale = scale < 1.f ? scale : 1.f;
 		return v * scale;
 	}
-#pragma endregion //GlobalVectorFunctions
+#pragma endregion
 
 #pragma region ExtraFunctions
-	///*! Random Vector2f */
-	//inline Vector2f randomVector2(float max = 1.f)
-	//{
-	//	return{ randomBinomial(max),randomBinomial(max) };
-	//}
-	//inline Vector2f randomVector2(float min, float max)
-	//{
-	//	return{ randomFloat(min, max),randomFloat(min, max) };
-	//}
-
 	/*Creates a normalized vector from an angle in radians.  */
 	inline Vector2f OrientationToVector(float orientation)
 	{

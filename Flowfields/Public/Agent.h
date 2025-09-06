@@ -17,6 +17,8 @@ namespace FF
 		Agent(Agent&&) noexcept = delete;
 		Agent& operator=(Agent&&) noexcept = delete;
 
+		[[nodiscard]] Point2i const& GetPos() const noexcept { return m_Pos; }
+
 		void Render() const;
 		void Update(class Grid* pGrid);
 

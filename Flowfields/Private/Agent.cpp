@@ -9,7 +9,7 @@ namespace FF
 
 	void Agent::Render() const
 	{
-		constexpr auto agentColor{ RGB(0,0,0) };
+		constexpr auto agentColor{ RGB(255,0,0) };
 
 		GAME_ENGINE->SetColor(agentColor);
 		GAME_ENGINE->FillOval(m_Pos.x, m_Pos.y, m_AgentSize, m_AgentSize);

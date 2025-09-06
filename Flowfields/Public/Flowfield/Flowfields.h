@@ -44,9 +44,8 @@ namespace FF
 
 		std::vector<std::unique_ptr<Agent>> m_pAgents;
 
-		// has the goal and source pos been set at least once
+		// has the goal pos been set at least once
 		bool m_SetGoal{ false };
-		bool m_SetSource{ false };
 
 		void InitRandomAgents();
 	};

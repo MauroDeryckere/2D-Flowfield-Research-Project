@@ -28,17 +28,19 @@ namespace FF
 
 		// Set the keys that the game needs to listen to
 		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2, VK_F3, VK_F4, VK_F5 });
-
 	}
 
 	void Flowfields::Start()
 	{
 		m_pFont = std::make_unique<Font>(_T("Courier New"), false, false, false, 20);
+		GAME_ENGINE->SetFont(m_pFont.get());
+
 		m_Grid = std::make_unique<Grid>();
 
 		InitRandomAgents();
 
-		GAME_ENGINE->SetFont(m_pFont.get());
+		m_Grid->UpdateSourcePos(m_pAgents.front()->GetPos().x, 
+								m_pAgents.front()->GetPos().y);
 	}
 
 	void Flowfields::End()
@@ -60,7 +62,7 @@ namespace FF
 	{
 		m_Grid->UpdateGrid();
 
-		if (m_SetGoal and m_SetSource)
+		if (m_SetGoal)
 		{
 			for (auto& agent : m_pAgents)
 			{
@@ -76,13 +78,7 @@ namespace FF
 			m_Grid->UpdateGoalPos(x, y);
 			m_SetGoal = true;
 		}
-		if (!isLeft && isDown)
-		{
-			m_Grid->UpdateSourcePos(x, y);
-			m_SetSource = true;
-		}
 	}
-
 
 	void Flowfields::MouseWheelAction(int x, int y, int distance, WPARAM wParam)
 	{	
@@ -118,10 +114,9 @@ namespace FF
 	}
 
 	void Flowfields::KeyPressed(TCHAR cKey)
-	{	
-		// Insert the code that needs to be executed when a key of choice is pressed
+	{
 		// Is executed as soon as the key is released
-		// You first need to specify the keys that the game engine needs to watch by using the SetKeyList() method
+		// Insert the code that needs to be executed when a key of choice is pressed
 
 		switch (cKey)
 		{
@@ -161,9 +156,7 @@ namespace FF
 
 	void Flowfields::InitRandomAgents()
 	{
-		constexpr auto AMT_OF_AGENTS{ 10 };
-
-		auto& bounds{ m_Grid->GetBounds() };
+		auto const& bounds{ m_Grid->GetBounds() };
 
 		for (size_t i{ 0 }; i < AMT_OF_AGENTS; ++i)
 		{
