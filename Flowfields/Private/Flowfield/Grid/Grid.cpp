@@ -16,11 +16,6 @@ namespace FF
 		InitGridSectors();
 		InitPortals();
 		SetupPortalGraph();
-		
-		m_CostFunction = [this](unsigned toFieldId, unsigned cellIdx)
-		{
-			return m_pGridSectors[toFieldId]->GetIntegrationFromIdx(cellIdx);
-		};
 	}
 
 	Grid::~Grid() { }
@@ -77,7 +72,7 @@ namespace FF
 			m_pGridSectors[m_GoalGridVecIdx]->LoadSector();
 			activeGridIdxes.emplace_back(m_GoalGridVecIdx);
 
-			m_pGridSectors[m_GoalGridVecIdx]->CalculateFlowField(goalPortal, m_CostFunction);
+			m_pGridSectors[m_GoalGridVecIdx]->CalculateFlowField(goalPortal, this);
 
 
 			if (onlyGoalField)
@@ -113,7 +108,7 @@ namespace FF
 				m_pGridSectors[(*portalIt).fromFieldId]->LoadSector();
 				activeGridIdxes.emplace_back((*portalIt).fromFieldId);
 
-				m_pGridSectors[(*portalIt).fromFieldId]->CalculateFlowField(*portalIt, m_CostFunction);
+				m_pGridSectors[(*portalIt).fromFieldId]->CalculateFlowField(*portalIt, this);
 			}
 
 			m_RecalculateGrid = false;
@@ -150,21 +145,23 @@ namespace FF
 
 		const auto newSourceIdx{ PositionToGridSectorIdx(x, y) };
 
+		//Invalid sourcePos
 		if (newSourceIdx == -1)
 		{
-			//Invalid sourcePos
 			return false;
 		}
 
-		//if (newSourceIdx != m_SourceVecIdx)
-		//{
-			m_RecalculateGrid = true;
-		//}
+		m_RecalculateGrid = true;
 
 		m_SourceVecIdx = static_cast<unsigned>(newSourceIdx);
 		m_SourcePos = { x, y };
 
 		return true;
+	}
+
+	uint16_t Grid::GetIntegrationCostFromCellIdx(unsigned toFieldId, unsigned cellIdx)
+	{
+		return m_pGridSectors[toFieldId]->GetIntegrationFromIdx(cellIdx);
 	}
 
 	GridSector* Grid::GetGridSector(Point2i const& position) const

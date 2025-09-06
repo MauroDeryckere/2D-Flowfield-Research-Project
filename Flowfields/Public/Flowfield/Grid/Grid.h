@@ -32,10 +32,9 @@ namespace FF
         bool UpdateSource(std::vector<std::unique_ptr<class Agent>> const& agents);
 
         [[nodiscard]] utils::Recti const& GetBounds() const noexcept { return m_Bounds; }
+        [[nodiscard]] uint16_t GetIntegrationCostFromCellIdx(unsigned toFieldId, unsigned cellIdx);
 
-        using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
-
-        GridSector* GetGridSector(Point2i const& position) const;
+    	GridSector* GetGridSector(Point2i const& position) const;
 
     private:
         bool m_RecalculateGrid{ false };
@@ -43,8 +42,6 @@ namespace FF
         Point2i m_GoalPos{ 0, 0 };
 
         utils::Recti m_Bounds;
-
-        Grid::GetIntegrationCostFromCellIdx m_CostFunction;
 
         std::unique_ptr<Graph> m_pGraph;
 

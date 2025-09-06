@@ -112,9 +112,9 @@ namespace FF
 		return m_IsActive;
 	}
 
-	bool GridSector::CalculateFlowField(const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction)
+	bool GridSector::CalculateFlowField(const Portal& portal, Grid* pGrid)
 	{
-		if (!CalculateIntegrationField(portal, costFunction))
+		if (!CalculateIntegrationField(portal, pGrid))
 		{
 			return false;
 		}
@@ -173,7 +173,7 @@ namespace FF
 					}
 					else
 					{
-						const uint16_t neighborCost{ GetFlowFieldNeighborCostForPortal(Directions(dir), row, col, portal, costFunction) };
+						const uint16_t neighborCost{ GetFlowFieldNeighborCostForPortal(Directions(dir), row, col, portal, pGrid) };
 
 						if (neighborCost < cheapestCost)
 						{
@@ -190,7 +190,7 @@ namespace FF
 	    return true;
 	}
 
-	bool GridSector::CalculateIntegrationField(const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction) noexcept
+	bool GridSector::CalculateIntegrationField(const Portal& portal, Grid* pGrid) noexcept
 	{
 		m_IntegrationField.assign(m_IntegrationField.size(), UINT16_MAX);
 		m_GoalList.clear();
@@ -216,7 +216,7 @@ namespace FF
 
 				if (m_CostField[index] != 255) //Do not push a wall on the integration
 				{
-					const auto integrateValue{ costFunction(portal.toFieldId, portal.toFieldWindowCellIdxes[i]) };
+					const auto integrateValue{ pGrid->GetIntegrationCostFromCellIdx(portal.toFieldId, portal.toFieldWindowCellIdxes[i]) };
 
 					if (integrateValue != UINT16_MAX)
 					{
@@ -291,7 +291,7 @@ namespace FF
 		return neighbors;
 	}
 
-	uint16_t GridSector::GetFlowFieldNeighborCostForPortal(Directions direction, unsigned row, unsigned col, const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction) const
+	uint16_t GridSector::GetFlowFieldNeighborCostForPortal(Directions direction, unsigned row, unsigned col, const Portal& portal, Grid* pGrid) const
 	{
 		bool isValidNeighbor{ IsValidIntegrationNeighborIdx(direction, row, col, portal) };
 
@@ -327,7 +327,7 @@ namespace FF
 			return m_IntegrationField[neighborIdx];
 		}
 
-		const auto cost{ costFunction(portal.toFieldId, fieldIdx) };
+		const auto cost{ pGrid->GetIntegrationCostFromCellIdx(portal.toFieldId, fieldIdx) };
 
 		return cost;
 	}

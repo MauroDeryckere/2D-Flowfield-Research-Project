@@ -43,7 +43,7 @@ namespace FF
 
         Directions GetFlowFieldOutput(const utils::Point2i& agentPos);
 
-        bool CalculateFlowField(const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction);
+        bool CalculateFlowField(const Portal& portal, Grid* pGrid);
 
         uint16_t GetIntegrationFromIdx(unsigned idx) const;
 
@@ -78,7 +78,7 @@ namespace FF
         std::vector<uint8_t> m_FlowField;
     private:
         bool InitCostField();
-        bool CalculateIntegrationField(const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction) noexcept;
+        bool CalculateIntegrationField(const Portal& portal, Grid* pGrid) noexcept;
 
         void DrawGrid() const;
         void DrawCostField() const;
@@ -87,7 +87,7 @@ namespace FF
         void DrawPortals() const;
 
         std::vector<unsigned> GetIntegrationNeighbors(unsigned col, unsigned row) const;
-        uint16_t GetFlowFieldNeighborCostForPortal(Directions direction, unsigned row, unsigned col, const Portal& portal, const Grid::GetIntegrationCostFromCellIdx& costFunction) const;
+        uint16_t GetFlowFieldNeighborCostForPortal(Directions direction, unsigned row, unsigned col, const Portal& portal, Grid* pGrid) const;
 
         bool IsValidIntegrationNeighborIdx(Directions direction, unsigned row, unsigned col, const Portal& portal) const;
 
