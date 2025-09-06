@@ -7,8 +7,11 @@
 //		- developed from GameEngine 7_01
 //
 // Bugfixes:
-//		- Fixed window focus in keyboard thread 	
-//
+//		- Fixed window focus in keyboard thread
+
+// GameEngine.h modifications Mauro Deryckere
+//		- Updated the keypressed and keylist logic to support all keys
+
 //-----------------------------------------------------------------
 
 #pragma once
