@@ -23,9 +23,7 @@ namespace FF
 		};
 	}
 
-	Grid::~Grid()
-	{
-	}
+	Grid::~Grid() { }
 
 	void Grid::Draw() const
 	{
@@ -49,13 +47,14 @@ namespace FF
 			}
 		}
 
+		int constexpr GOAL_SIZE{ 20 };
 		GAME_ENGINE->SetColor(RGB(0, 0, 0));
-		GAME_ENGINE->FillOval(m_GoalPos.x,m_GoalPos.y, 20, 20);
-		GAME_ENGINE->FillOval(m_SourcePos.x, m_SourcePos.y, 20, 20);
+		GAME_ENGINE->FillOval(m_GoalPos.x - GOAL_SIZE/2,m_GoalPos.y - GOAL_SIZE/2, GOAL_SIZE, GOAL_SIZE);
+		GAME_ENGINE->FillOval(m_SourcePos.x - GOAL_SIZE/2, m_SourcePos.y - GOAL_SIZE/2, GOAL_SIZE, GOAL_SIZE);
 
+		// draw bounds
 		GAME_ENGINE->SetColor(RGB(0, 255, 0));
 		GAME_ENGINE->DrawRect(m_Bounds.x, m_Bounds.y, m_Bounds.width, m_Bounds.height);
-
 	}
 
 	void Grid::UpdateGrid()
@@ -144,8 +143,11 @@ namespace FF
 		return true;
 	}
 
-	bool Grid::UpdateSourcePos(int x, int y)
+	bool Grid::UpdateSource(std::vector<std::unique_ptr<class Agent>> const& agents)
 	{
+		int const x{ agents[0]->GetPos().x };
+		int const y{ agents[0]->GetPos().y };
+
 		const auto newSourceIdx{ PositionToGridSectorIdx(x, y) };
 
 		if (newSourceIdx == -1)

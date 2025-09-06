@@ -37,6 +37,7 @@ F2: Draw the integration field. <br>
 F3: Draw the flow field. <br>
 F4: Draw the portals. <br>
 F5: Draw the graph. <br>
+F10: Refresh source position(s). <br>
 
 ## Flowfield Design And Implementation
 To understand how the flowfield works for large maps, we first have to look at a single flowfield (or gridsector when we combine multiple smaller flowfields). Each flowfield or vector field is made up of 3 different fields or vectors. 

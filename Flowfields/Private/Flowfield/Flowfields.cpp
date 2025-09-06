@@ -5,14 +5,8 @@
 
 namespace FF
 {
-	Flowfields::Flowfields()
-	{
-	}
-
-	Flowfields::~Flowfields()
-	{
-
-	}
+	Flowfields::Flowfields() { }
+	Flowfields::~Flowfields() { }
 
 	void Flowfields::Initialize(HINSTANCE hInstance)			
 	{
@@ -27,7 +21,7 @@ namespace FF
 	    GAME_ENGINE->SetFrameRate(50);
 
 		// Set the keys that the game needs to listen to
-		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2, VK_F3, VK_F4, VK_F5 });
+		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2, VK_F3, VK_F4, VK_F5, VK_F6, VK_F7, VK_F8, VK_F9, VK_F10, VK_F11, VK_F12 });
 	}
 
 	void Flowfields::Start()
@@ -39,13 +33,10 @@ namespace FF
 
 		InitRandomAgents();
 
-		m_Grid->UpdateSourcePos(m_pAgents.front()->GetPos().x, 
-								m_pAgents.front()->GetPos().y);
+		m_Grid->UpdateSource(m_pAgents);
 	}
 
-	void Flowfields::End()
-	{
-	}
+	void Flowfields::End() { }
 
 	void Flowfields::Paint(RECT rect)
 	{
@@ -77,6 +68,8 @@ namespace FF
 		{
 			m_Grid->UpdateGoalPos(x, y);
 			m_SetGoal = true;
+
+			//m_Grid->UpdateSource(m_pAgents);
 		}
 	}
 
@@ -143,6 +136,12 @@ namespace FF
 		case VK_F5:
 		{
 			g_DrawGraph = !g_DrawGraph;
+			break;
+		}
+
+		case VK_F10:
+		{
+			m_Grid->UpdateSource(m_pAgents);
 			break;
 		}
 		default: break;

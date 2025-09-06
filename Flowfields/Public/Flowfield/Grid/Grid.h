@@ -29,7 +29,7 @@ namespace FF
         void UpdateGrid();
 
         bool UpdateGoalPos(int x, int y);
-        bool UpdateSourcePos(int x, int y);
+        bool UpdateSource(std::vector<std::unique_ptr<class Agent>> const& agents);
 
         [[nodiscard]] utils::Recti const& GetBounds() const noexcept { return m_Bounds; }
 

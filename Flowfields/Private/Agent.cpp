@@ -12,7 +12,7 @@ namespace FF
 		constexpr auto agentColor{ RGB(255,0,0) };
 
 		GAME_ENGINE->SetColor(agentColor);
-		GAME_ENGINE->FillOval(m_Pos.x, m_Pos.y, m_AgentSize, m_AgentSize);
+		GAME_ENGINE->FillOval(m_Pos.x - m_AgentSize/2, m_Pos.y - m_AgentSize/2, m_AgentSize, m_AgentSize);
 	}
 
 	void Agent::Update(Grid* pGrid)
