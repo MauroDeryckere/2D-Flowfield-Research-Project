@@ -1,5 +1,5 @@
-#ifndef FLOWFIELDS_H
-#define FLOWFIELDS_H
+#ifndef FF_FLOWFIELDS_H
+#define FF_FLOWFIELDS_H
 
 #include "Resource.h"	
 #include "GameEngine.h"
@@ -11,10 +11,10 @@
 
 #include "Grid/Grid.h"
 
-class Agent;
-
 namespace FF
 {
+	class Agent;
+
 	class Flowfields : public AbstractGame, public Callable
 	{
 	public:				
@@ -44,8 +44,8 @@ namespace FF
 
 		std::vector<std::unique_ptr<Agent>> m_pAgents;
 
-		bool m_SetGoal = false;
-		bool m_SetSource = false;
+		bool m_SetGoal{ false };
+		bool m_SetSource{ false };
 
 		void InitRandomAgents();
 	};

@@ -1,5 +1,5 @@
-#ifndef GRID 
-#define GRID
+#ifndef FF_GRID_H
+#define FF_GRID_H
 
 #include "../../Utils.h"
 #include "../../Graph/Graph.h"
@@ -9,65 +9,67 @@
 #include <memory>
 #include <functional>
 
-class GridSector;
-
-class Grid final
+namespace FF
 {
-public:
-    Grid();
-    ~Grid();
+    class GridSector;
 
-    Grid(const Grid&) = delete;
-    Grid& operator=(const Grid&) = delete;
-    Grid(Grid&&) noexcept = delete;
-    Grid& operator=(Grid&&) noexcept = delete;
+    class Grid final
+    {
+    public:
+        Grid();
+        ~Grid();
 
-    void Draw() const;
+        Grid(const Grid&) = delete;
+        Grid& operator=(const Grid&) = delete;
+        Grid(Grid&&) noexcept = delete;
+        Grid& operator=(Grid&&) noexcept = delete;
 
-    void UpdateGrid();
+        void Draw() const;
 
-    bool UpdateGoalPos(int x, int y);
-    bool UpdateSourcePos(int x, int y);
+        void UpdateGrid();
 
-	[[nodiscard]] utils::Recti const& GetBounds() const noexcept { return m_Bounds; }
+        bool UpdateGoalPos(int x, int y);
+        bool UpdateSourcePos(int x, int y);
 
-    using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
+        [[nodiscard]] utils::Recti const& GetBounds() const noexcept { return m_Bounds; }
 
-	GridSector* GetGridSector(Point2i const& position) const;
+        using GetIntegrationCostFromCellIdx = std::function<uint16_t(unsigned toFieldId, unsigned cellIdx)>;
 
-private:
-    bool m_RecalculateGrid{ false };
-    Point2i m_SourcePos{0, 0};
-    Point2i m_GoalPos{ 0, 0 };
+        GridSector* GetGridSector(Point2i const& position) const;
 
-    utils::Recti m_Bounds;
+    private:
+        bool m_RecalculateGrid{ false };
+        Point2i m_SourcePos{ 0, 0 };
+        Point2i m_GoalPos{ 0, 0 };
 
-    Grid::GetIntegrationCostFromCellIdx m_CostFunction;
+        utils::Recti m_Bounds;
 
-    std::unique_ptr<Graph> m_pGraph;
+        Grid::GetIntegrationCostFromCellIdx m_CostFunction;
 
-    std::vector<std::unique_ptr<GridSector>> m_pGridSectors;
-    std::vector<std::vector<Portal>> m_Portals; //For every gridsector, store a vector of all Portals in that grid
+        std::unique_ptr<Graph> m_pGraph;
 
-    std::vector<GraphNode*> m_pPath;
+        std::vector<std::unique_ptr<GridSector>> m_pGridSectors;
+        std::vector<std::vector<Portal>> m_Portals; //For every gridsector, store a vector of all Portals in that grid
 
-    int m_pGoalGraphNodeIdx{ -1 };
-    int m_SourceNodeIdx{ -1 };
-    unsigned m_GoalGridVecIdx{ 0 };
-    unsigned m_SourceVecIdx{ 2 };
+        std::vector<GraphNode*> m_pPath;
 
-    void InitGridSectors() noexcept;
-    void InitPortals() noexcept;
-    void SetupPortalGraph() noexcept;
+        int m_pGoalGraphNodeIdx{ -1 };
+        int m_SourceNodeIdx{ -1 };
+        unsigned m_GoalGridVecIdx{ 0 };
+        unsigned m_SourceVecIdx{ 2 };
 
-    void RequestPath(int sourceX, int sourceY, int goalX, int goalY) noexcept;
+        void InitGridSectors() noexcept;
+        void InitPortals() noexcept;
+        void SetupPortalGraph() noexcept;
 
-    int PositionToGridSectorIdx(int x, int y) const; //-1 is invalid
+        void RequestPath(int sourceX, int sourceY, int goalX, int goalY) noexcept;
 
-    void ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept;
+        int PositionToGridSectorIdx(int x, int y) const; //-1 is invalid
 
-    void AddGridSector(std::unique_ptr<GridSector>&& sector, bool first = false) noexcept;
-};
+        void ResetFields(std::vector<unsigned>& activeGridIdxes) noexcept;
+
+        void AddGridSector(std::unique_ptr<GridSector>&& sector, bool first = false) noexcept;
+    };
+}
 
 #endif
-

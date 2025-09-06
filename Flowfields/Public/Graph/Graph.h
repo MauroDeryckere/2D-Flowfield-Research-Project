@@ -1,5 +1,5 @@
-#ifndef GRAPH 
-#define GRAPH
+#ifndef FF_GRAPH_H
+#define FF_GRAPH_H
 
 #include "../Utils.h"
 
@@ -11,42 +11,43 @@
 
 using utils::Point2i;
 
-
 //Graph needs to be updated; TODO
-
-class Graph final
+namespace FF
 {
-public:
-	Graph() = default;
-	~Graph() = default;
+	class Graph final
+	{
+	public:
+		Graph() = default;
+		~Graph() = default;
 
-	void DrawGraph() const;
+		void DrawGraph() const;
 
-	//Nodes
-	const std::vector<std::unique_ptr<GraphNode>>& GetNodes() const;
+		//Nodes
+		const std::vector<std::unique_ptr<GraphNode>>& GetNodes() const;
 
-	GraphNode* GetNode(int nodeId) const;
+		GraphNode* GetNode(int nodeId) const;
 
-	int AddNode(const Point2i& pos);
-	void RemoveNode(unsigned nodeId);
-	bool IsNodeValid(int index) const;
+		int AddNode(const Point2i& pos);
+		void RemoveNode(unsigned nodeId);
+		bool IsNodeValid(int index) const;
 
-	//Connections
-	void AddConnection(unsigned fromNodeId, unsigned toNodeId);
-	GraphConnection* GetConnection(unsigned fromNodeId, unsigned toNodeId) const;
-	void RemoveConnection(unsigned fromNodeId, unsigned toNodeId);
-	void RemoveConnection(GraphConnection* pConnection);
-	
-	const std::vector<std::unique_ptr<GraphConnection>>& GetConnectionsFromNode(int nodeId) const;
+		//Connections
+		void AddConnection(unsigned fromNodeId, unsigned toNodeId);
+		GraphConnection* GetConnection(unsigned fromNodeId, unsigned toNodeId) const;
+		void RemoveConnection(unsigned fromNodeId, unsigned toNodeId);
+		void RemoveConnection(GraphConnection* pConnection);
 
-private:
-	std::vector<std::unique_ptr<GraphNode>> m_pGraphNodes;
-	std::vector<std::vector<std::unique_ptr<GraphConnection>>> m_pConnections;
+		const std::vector<std::unique_ptr<GraphConnection>>& GetConnectionsFromNode(int nodeId) const;
 
-	unsigned m_NextID{ 0 };
+	private:
+		std::vector<std::unique_ptr<GraphNode>> m_pGraphNodes;
+		std::vector<std::vector<std::unique_ptr<GraphConnection>>> m_pConnections;
 
-private:
-	void DrawConnections() const;
-};
+		unsigned m_NextID{ 0 };
+
+	private:
+		void DrawConnections() const;
+	};
+}
 
 #endif

@@ -1,13 +1,13 @@
-#ifndef AGENT 
-#define AGENT
+#ifndef FF_AGENT_H
+#define FF_AGENT_H
 
 #include "Utils.h"
 using utils::Point2i;
 
-class GridSector;
-
-class Agent final
+namespace FF
 {
+	class Agent final
+	{
 	public:
 		Agent(const Point2i& pos);
 		~Agent() = default;
@@ -23,6 +23,10 @@ class Agent final
 	private:
 		Point2i m_Pos;
 		const unsigned m_AgentSize{ 20 };
-};
+	};
+}
+class GridSector;
+
+
 
 #endif

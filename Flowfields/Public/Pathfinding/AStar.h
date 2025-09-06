@@ -1,8 +1,5 @@
-#ifndef ASTAR 
-#define ASTAR
-
-class Graph;
-class GraphNode;
+#ifndef FF_ASTAR_H
+#define FF_ASTAR_H
 
 #include <vector>
 #include <queue>
@@ -10,36 +7,42 @@ class GraphNode;
 #include <unordered_map>
 #include <limits>
 
-class AStar final
+namespace FF
 {
-public:
-	AStar(Graph* pGraph);
+    class Graph;
+    class GraphNode;
 
-	std::vector<GraphNode*> FindPath(GraphNode* pStartNode, GraphNode* pDestinationNode);
-
-private:
-    struct AStarNode
+    class AStar final
     {
-        GraphNode* node;
-        float gCost; 
-        float hCost; 
+    public:
+        AStar(Graph* pGraph);
 
-        bool operator<(const AStarNode& other) const
+        std::vector<GraphNode*> FindPath(GraphNode* pStartNode, GraphNode* pDestinationNode);
+
+    private:
+        struct AStarNode
         {
-            return gCost + hCost > other.gCost + other.hCost;
-        }
+            GraphNode* node;
+            float gCost;
+            float hCost;
+
+            bool operator<(const AStarNode& other) const
+            {
+                return gCost + hCost > other.gCost + other.hCost;
+            }
+        };
+
+        std::priority_queue<AStarNode> m_OpenSet;
+
+        std::unordered_map<GraphNode*, float> m_gCosts;  // cost from start to each node
+        std::unordered_map<GraphNode*, GraphNode*> m_CameFrom;  // parent node for each node
+
+        Graph* m_pGraph;
+
+        float CalculateHeuristic(GraphNode* pStartNode, GraphNode* pDestNode) const;
+        std::vector<GraphNode*> ReconstructPath(GraphNode* pStart, GraphNode* pCurr) const;
     };
-
-    std::priority_queue<AStarNode> m_OpenSet;
-
-    std::unordered_map<GraphNode*, float> m_gCosts;  // cost from start to each node
-    std::unordered_map<GraphNode*, GraphNode*> m_CameFrom;  // parent node for each node
-
-	Graph* m_pGraph;
-
-    float CalculateHeuristic(GraphNode* pStartNode, GraphNode* pDestNode) const;
-    std::vector<GraphNode*> ReconstructPath(GraphNode* pStart, GraphNode* pCurr) const;
-};
+}
 
 #endif
 
