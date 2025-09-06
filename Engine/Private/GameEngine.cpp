@@ -46,7 +46,7 @@ GameEngine::GameEngine() :	m_hInstance(NULL),
 							m_FrameDelay(20),		// 50 FPS default
 							m_RunGameLoop(false),
 							m_KeybRunning(true),	// create the keyboard monitoring thread
-							m_KeyListPtr(nullptr),
+							m_KeyList{},
 							m_KeybMonitor(0x0),		// binary ; 0 = key not pressed, 1 = key pressed
 							m_IsPainting(false),
 							m_IsDoublebuffering(false),
@@ -66,13 +66,6 @@ GameEngine::~GameEngine()
 	m_KeybRunning = false;
 	WaitForSingleObject( m_hKeybThread, INFINITE );
 	CloseHandle( m_hKeybThread );	
-	
-	// clean up keyboard monitor buffer after the thread that uses it is closed
-	if (m_KeyListPtr != 0) 
-	{
-		delete m_KeyListPtr;
-		m_KeyListPtr = 0;
-	}
 
 	// clean up the font
 	if (m_FontDraw != 0) 
@@ -103,23 +96,21 @@ DWORD GameEngine::KeybThreadProc()
 {
 	while (m_KeybRunning)
 	{
-		if (m_KeyListPtr != nullptr && GetForegroundWindow() == m_Window)
+		if (not m_KeyList.empty() && GetForegroundWindow() == m_Window)
 		{
-			int count{};
-			int key{ m_KeyListPtr[0] };
+			for (size_t count = 0; count < m_KeyList.size() && count < (8 * sizeof(unsigned int)); ++count)
+			{
+				int key = m_KeyList[count];
 
-			while (key != '\0' && count < (8 * sizeof(unsigned int)))
-			{	
 				if ( !(GetAsyncKeyState(key)<0) ) // key is not pressed
-				{	    
-					if (m_KeybMonitor & (0x1 << count)) {
+				{
+					if (m_KeybMonitor & (0x1 << count)) 
+					{
 						m_GamePtr->KeyPressed(key); // if the bit was 1, this fires a keypress
 					}
 					m_KeybMonitor &= ~(0x1 << count);   // the bit is set to 0: key is not pressed
 				}
 				else m_KeybMonitor |= (0x1 << count);	// the bit is set to 1: key is pressed
-
-				key = m_KeyListPtr[++count]; // increase count and get next key
 			}
 		}	
 
@@ -422,17 +413,14 @@ bool GameEngine::IsKeyDown(int vKey) const
 	else return false;
 }
 
-void GameEngine::SetKeyList(const tstring& keyListRef)
+void GameEngine::SetKeyList(std::vector<int> const& keyListRef)
 {
-	if (keyListRef.c_str() != NULL) delete m_KeyListPtr; // clear list if a list already exists
-
-	m_KeyListPtr = (TCHAR*) malloc((keyListRef.size() + 1) * sizeof(TCHAR)); // make place for this amount of keys + 1
-
-	for (int count = 0; count < (int) keyListRef.size() + 1; ++count) 
+	if (!keyListRef.empty())
 	{
-		TCHAR key = keyListRef.c_str()[count]; 
-		m_KeyListPtr[count] = (key > 96 && key < 123)? key-32 : key; // insert the key, coverted to uppercase if supplied character is lowercase
+		m_KeyList.clear(); // clear list if a list already exists
 	}
+
+	m_KeyList = keyListRef;
 }
 
 void GameEngine::Quit() const

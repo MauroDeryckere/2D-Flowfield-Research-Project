@@ -32,20 +32,20 @@ namespace FF
 
 		if (m_IsActive)
 		{
-			if constexpr (drawPortals)
+			if (g_DrawPortals)
 			{
 				DrawPortals();
 			}
 
-			if constexpr (drawCostField)
+			if (g_DrawCostField)
 			{
 				DrawCostField();
 			}
-			if constexpr (drawIntegrationField)
+			if (g_DrawIntegrationField)
 			{
 				DrawIntegrationField();
 			}
-			if constexpr (drawFlowField)
+			if (g_DrawFlowField)
 			{
 				DrawFlowField();
 			}
@@ -569,7 +569,7 @@ namespace FF
 
 	bool GridSector::InitCostField()
 	{
-		if constexpr (FF::initRandomCostField)
+		if (g_InitRandomCostField)
 		{
 			for (auto& value : m_CostField)
 			{

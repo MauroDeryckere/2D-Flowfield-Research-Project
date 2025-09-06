@@ -26,23 +26,15 @@ namespace FF
 	    GAME_ENGINE->SetFrameRate(50);
 
 		// Set the keys that the game needs to listen to
-		//tstringstream buffer;
-		//buffer << _T("KLMO");
-		//buffer << (TCHAR) VK_LEFT;
-		//buffer << (TCHAR) VK_RIGHT;
-		//GAME_ENGINE->SetKeyList(buffer.str());
+		GAME_ENGINE->SetKeyList({ VK_F1, VK_F2 });
 
 	}
 
 	void Flowfields::Start()
 	{
-		//m_pUI = std::make_unique<UI>(this);
-		//m_pMapEditor = std::make_unique<MapEditor>();
-
 		m_pFont = std::make_unique<Font>(_T("Courier New"), false, false, false, 20);
 		m_Grid = std::make_unique<Grid>();
 
-		//m_pAgents.emplace_back(std::make_unique<Agent>());
 		InitRandomAgents();
 
 		GAME_ENGINE->SetFont(m_pFont.get());
@@ -61,8 +53,6 @@ namespace FF
 		{
 			pAgent->Render();
 		}
-
-		//m_pMapEditor->Draw();
 	}
 
 	void Flowfields::Tick()
@@ -128,31 +118,16 @@ namespace FF
 
 	void Flowfields::KeyPressed(TCHAR cKey)
 	{	
-		// DO NOT FORGET to use SetKeyList() !!
-
 		// Insert the code that needs to be executed when a key of choice is pressed
 		// Is executed as soon as the key is released
 		// You first need to specify the keys that the game engine needs to watch by using the SetKeyList() method
 
-		/* Example:
 		switch (cKey)
 		{
-		case _T('K'): case VK_LEFT:
-			GAME_ENGINE->MessageBox(_T("Moving left."));
-			break;
-		case _T('L'): case VK_DOWN:
-			GAME_ENGINE->MessageBox(_T("Moving down."));
-			break;
-		case _T('M'): case VK_RIGHT:
-			GAME_ENGINE->MessageBox(_T("Moving right."));
-			break;
-		case _T('O'): case VK_UP:
-			GAME_ENGINE->MessageBox(_T("Moving up."));
-			break;
-		case VK_ESCAPE:
-			GAME_ENGINE->MessageBox(_T("Escape menu."));
+		case VK_F1:
+		default: break;
 		}
-		*/
+		
 	}
 
 	void Flowfields::CallAction(Caller* callerPtr)

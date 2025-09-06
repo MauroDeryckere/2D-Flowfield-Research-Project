@@ -162,7 +162,7 @@ public:
 	// Public Mutator Methods	
 	void		SetTitle(const tstring& titleRef);							// SetTitle automatically sets the window class name to the same name as the title 
 	void		SetLocation(int x, int y);
-	void		SetKeyList(const tstring& keyListRef);
+	void		SetKeyList(std::vector<int> const& keyListRef);
 	void		SetIcon(WORD icon)						{ m_Icon = icon; }
 	void		SetSmallIcon(WORD smallIcon)			{ m_SmallIcon = smallIcon; }
 	void		SetWidth(int width)						{ m_Width = width; }
@@ -193,7 +193,7 @@ private:
 	HANDLE				m_hKeybThread{};
 	DWORD				m_dKeybThreadID{};
 	bool				m_KeybRunning{};
-	TCHAR*				m_KeyListPtr{};
+	std::vector<int>	m_KeyList{};
 	unsigned int		m_KeybMonitor{};
 	AbstractGame*		m_GamePtr{};
 	bool				m_PaintDoublebuffered{};

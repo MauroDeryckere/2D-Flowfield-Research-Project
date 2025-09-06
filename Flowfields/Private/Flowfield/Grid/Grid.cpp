@@ -34,7 +34,7 @@ namespace FF
 			gridSec->Draw();
 		}
 
-		if constexpr (FF::drawGraph)
+		if (g_DrawGraph)
 		{
 			m_pGraph->DrawGraph();
 

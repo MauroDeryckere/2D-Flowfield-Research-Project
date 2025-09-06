@@ -3,14 +3,14 @@
 
 namespace FF
 {
-	inline constexpr bool drawCostField{ false };
-	inline constexpr bool drawIntegrationField{ true };
-	inline constexpr bool drawFlowField{ true };
+	inline bool g_DrawCostField{ false };
+	inline bool g_DrawIntegrationField{ true };
+	inline bool g_DrawFlowField{ true };
 
-	inline constexpr bool drawPortals{ true };
-	inline constexpr bool drawGraph{ false };
+	inline bool g_DrawPortals{ true };
+	inline bool g_DrawGraph{ false };
 
-	inline constexpr bool initRandomCostField{ false };
+	inline constexpr bool g_InitRandomCostField{ false };
 }
 
 #endif
